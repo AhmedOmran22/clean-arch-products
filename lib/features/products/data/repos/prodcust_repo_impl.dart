@@ -3,7 +3,7 @@ import 'package:maps/features/products/domain/entities/product_entity.dart';
 import 'package:maps/features/products/domain/repos/product_repo.dart';
 
 class ProductRepoImpl implements ProductRepo {
-  final ProductRemoteDateSource productRemoteDateSource;
+  final ProductDataSource productRemoteDateSource;
   ProductRepoImpl({required this.productRemoteDateSource});
   @override
   Future<List<ProductEntity>> getProducts() async {

@@ -1,18 +1,27 @@
 import 'package:maps/features/products/domain/entities/product_entity.dart';
 
-abstract class ProductCubitsState {}
+enum ProductCubitsState { initial, loading, success, error }
 
-class ProductCubitsInitial extends ProductCubitsState {}
+class ProductCubitState {
+  final List<ProductEntity>? products;
+  final String? errorMessage;
+  final ProductCubitsState state;
 
-class ProductCubitsLoading extends ProductCubitsState {}
+  ProductCubitState({
+    this.products,
+    this.errorMessage,
+    this.state = ProductCubitsState.initial,
+  });
 
-class ProductCubitsSuccess extends ProductCubitsState {
-  final List<ProductEntity> products;
-  ProductCubitsSuccess({required this.products});
+  ProductCubitState copyWith({
+    List<ProductEntity>? products,
+    String? errorMessage,
+    ProductCubitsState? state,
+  }) {
+    return ProductCubitState(
+      products: products ?? this.products,
+      errorMessage: errorMessage ?? this.errorMessage,
+      state: state ?? this.state,
+    );
+  }
 }
-
-class ProductCubitsError extends ProductCubitsState {
-  final String message;
-  ProductCubitsError({required this.message});
-}
-

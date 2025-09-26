@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:maps/features/simple_products/data/models/product_api_model.dart';
+import 'package:maps/features/products/domain/entities/product_entity.dart';
 
 class ProductItem extends StatelessWidget {
-  final ProductApiModel productApiModel;
+  final ProductEntity productEntity;
 
-  const ProductItem({super.key, required this.productApiModel});
+  const ProductItem({super.key, required this.productEntity});
 
   @override
   Widget build(BuildContext context) {
@@ -20,7 +20,7 @@ class ProductItem extends StatelessWidget {
             ClipRRect(
               borderRadius: BorderRadius.circular(12),
               child: Image.network(
-                productApiModel.images.first,
+                productEntity.image,
                 height: 180,
                 width: double.infinity,
                 fit: BoxFit.cover,
@@ -33,7 +33,7 @@ class ProductItem extends StatelessWidget {
               children: [
                 Expanded(
                   child: Text(
-                    productApiModel.title,
+                    productEntity.title,
                     style: const TextStyle(
                       fontSize: 18,
                       fontWeight: FontWeight.bold,
@@ -41,7 +41,7 @@ class ProductItem extends StatelessWidget {
                   ),
                 ),
                 Text(
-                  "\$${productApiModel.price.toStringAsFixed(2)}",
+                  "\$${productEntity.price.toStringAsFixed(2)}",
                   style: const TextStyle(
                     fontSize: 16,
                     fontWeight: FontWeight.w600,
@@ -53,13 +53,13 @@ class ProductItem extends StatelessWidget {
             const SizedBox(height: 8),
 
             Text(
-              "Category: ${productApiModel.category}",
+              "Category: ${productEntity.category}",
               style: TextStyle(fontSize: 14, color: Colors.grey[700]),
             ),
             const SizedBox(height: 8),
 
             Text(
-              productApiModel.description,
+              productEntity.description,
               maxLines: 3,
               overflow: TextOverflow.ellipsis,
               style: const TextStyle(fontSize: 14),
@@ -71,7 +71,7 @@ class ProductItem extends StatelessWidget {
                 const Icon(Icons.star, color: Colors.amber, size: 20),
                 const SizedBox(width: 4),
                 Text(
-                  productApiModel.rating.toStringAsFixed(1),
+                  productEntity.rating.toStringAsFixed(1),
                   style: const TextStyle(
                     fontSize: 14,
                     fontWeight: FontWeight.w600,

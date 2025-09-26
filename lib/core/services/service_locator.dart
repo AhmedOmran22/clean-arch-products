@@ -14,7 +14,7 @@ void setupServiceLocator() {
   getIt.registerSingleton<Dio>(Dio());
   getIt.registerSingleton<ApiService>(DioConsumer(dio: getIt()));
 
-  getIt.registerSingleton<ProductRemoteDateSource>(
+  getIt.registerSingleton<ProductDataSource>(
     ProductRemoteDateSourceImpl(apiService: getIt()),
   );
 

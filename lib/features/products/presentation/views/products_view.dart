@@ -1,37 +1,42 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:maps/features/products/presentation/widgets/procust_item.dart';
-import 'package:maps/features/simple_products/presentation/cubits/products_api_cubit.dart';
-import 'package:maps/features/simple_products/presentation/cubits/products_api_state.dart';
+
+import '../providers/product_provider.dart';
 
 class ProductsView extends StatelessWidget {
   const ProductsView({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final provider = context.watch<ProductProvider>();
+
     return Scaffold(
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          context.read<ProductsApiCubit>().getProducts();
+          provider.getProducts();
         },
         child: const Icon(Icons.get_app),
       ),
       appBar: AppBar(title: const Text("Products"), centerTitle: true),
-      body: BlocBuilder<ProductsApiCubit, ProductsApiCubitState>(
-        builder: (context, state) {
-          if (state is ProductsApiCubitSuccess) {
-            return ListView.builder(
-              physics: const BouncingScrollPhysics(),
-              itemCount: state.products.length,
-              itemBuilder: (context, index) {
-                return ProductItem(productApiModel: state.products[index]);
-              },
-            );
+      body: Builder(
+        builder: (context) {
+          switch (provider.state) {
+            case ProductProviderState.loading:
+              return const Center(child: CircularProgressIndicator());
+            case ProductProviderState.error:
+              return const Center(child: Text("Error"));
+            case ProductProviderState.success:
+              return ListView.builder(
+                physics: const BouncingScrollPhysics(),
+                itemCount: provider.products.length,
+                itemBuilder: (context, index) {
+                  return ProductItem(productEntity: provider.products[index]);
+                },
+              );
+            case ProductProviderState.initial:
+              return const Center(child: Text("Initial"));
           }
-          if (state is ProductsApiCubitError) {
-            return Center(child: Text(state.message));
-          }
-          return const Center(child: CircularProgressIndicator());
         },
       ),
     );

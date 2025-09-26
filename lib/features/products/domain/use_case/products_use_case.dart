@@ -5,11 +5,8 @@ class ProductsUseCase {
   final ProductRepo productRepo;
   ProductsUseCase({required this.productRepo});
   Future<List<ProductEntity>> getProducts() async {
-    try {
-      var result = await productRepo.getProducts();
-      return result;
-    } catch (e) {
-      rethrow;
-    }
+
+    var result = await productRepo.getProducts();
+    return result;
   }
 }

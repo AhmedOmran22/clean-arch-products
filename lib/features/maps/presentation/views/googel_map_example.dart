@@ -13,20 +13,23 @@ class _GoogelMapExampleState extends State<GoogelMapExample> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      // appBar: CustomGoogleMapsAppBar(titleText: 'Google Map Example'),
       body: GoogleMap(
-        polylines: {
-          const Polyline(
-            width: 5,
-            color: Colors.blueAccent,
-
-            endCap: Cap.roundCap,
-            startCap: Cap.roundCap,
-            polylineId: PolylineId("1"),
-            points: [
-              LatLng(31.114115638666128, 29.758278158000127),
-              LatLng(31.105671472280928, 29.765826089750814),
-            ],
+        markers: {
+          const Marker(
+            markerId: MarkerId("1"),
+            position: LatLng(31.092795979608535, 29.760375638261934),
+          ),
+          const Marker(
+            markerId: MarkerId("2"),
+            position: LatLng(31.094880191383425, 29.75052654559378),
+          ),
+          const Marker(
+            markerId: MarkerId("3"),
+            position: LatLng(31.08922068041644, 29.746664164457798),
+          ),
+          const Marker(
+            markerId: MarkerId("4"),
+            position: LatLng(31.09627664223193, 29.75078403766952),
           ),
         },
         zoomControlsEnabled: false,

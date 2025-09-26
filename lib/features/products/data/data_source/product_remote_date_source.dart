@@ -2,11 +2,11 @@ import 'package:maps/core/constants/end_points.dart';
 import 'package:maps/core/services/api_service.dart';
 import 'package:maps/features/products/data/models/product_model.dart';
 
-abstract class ProductRemoteDateSource {
+abstract class ProductDataSource {
   Future<List<ProductModel>> getProducts();
 }
 
-class ProductRemoteDateSourceImpl implements ProductRemoteDateSource {
+class ProductRemoteDateSourceImpl implements ProductDataSource {
   final ApiService apiService;
   ProductRemoteDateSourceImpl({required this.apiService});
   @override
